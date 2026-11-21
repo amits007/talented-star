@@ -1,12 +1,1134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Talented Star — Ujjain District Talent Championship 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --gold: #FFD700; --orange: #FF6B00; --red: #E8003D;
+  --dark: #0A0A0A; --dark2: #111111; --dark3: #1A1A1A;
+  --white: #FFFFFF; --grey: #AAAAAA; --green: #22C55E;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+body { background: var(--dark); color: var(--white); font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 900; opacity: 0.4;
+}
+
+/* ── FLOATING SOCIAL BAR ── */
+.social-float {
+  position: fixed; right: 0; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 0; z-index: 500;
+}
+.sf-btn {
+  width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+  text-decoration: none; font-size: 1.2rem; transition: width .3s, background .3s;
+  overflow: hidden; position: relative;
+}
+.sf-btn.ig { background: linear-gradient(135deg,#E1306C,#833AB4,#F77737); }
+.sf-btn.wa { background: #25D366; }
+.sf-btn.ph { background: var(--orange); }
+.sf-btn:hover { width: 130px; }
+.sf-label {
+  position: absolute; left: 48px; white-space: nowrap; font-size: .72rem;
+  font-weight: 700; letter-spacing: 1px; opacity: 0; transition: opacity .2s .1s;
+  color: #fff; padding: 0 12px;
+}
+.sf-btn:hover .sf-label { opacity: 1; }
+
+/* ── TOP ANNOUNCEMENT BAR ── */
+.announce-bar {
+  background: linear-gradient(135deg,var(--red),var(--orange));
+  text-align: center; padding: 9px 5%; font-size: .75rem;
+  font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.announce-bar a { color: #fff; text-decoration: none; }
+.announce-bar .sep { opacity: .5; }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 5%;
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255,215,0,0.12);
+}
+.logo {
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: 3px;
+  background: linear-gradient(135deg,var(--gold),var(--orange));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 26px; list-style: none; }
+.nav-links a {
+  color: var(--grey); text-decoration: none; font-size: .76rem;
+  font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: color .3s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-right { display: flex; gap: 10px; align-items: center; }
+.nav-cta {
+  background: linear-gradient(135deg,var(--red),var(--orange));
+  color: #fff; border: none; padding: 10px 22px;
+  font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: .74rem;
+  letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+  clip-path: polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+  transition: transform .2s, box-shadow .2s; text-decoration: none; display: inline-block;
+}
+.nav-cta:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(232,0,61,.5); }
+.nav-wa {
+  background: #25D366; color: #fff; border: none; padding: 10px 16px;
+  font-size: .8rem; cursor: pointer; border-radius: 4px; text-decoration: none;
+  font-weight: 700; transition: transform .2s;
+}
+.nav-wa:hover { transform: scale(1.05); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { width: 22px; height: 2px; background: var(--white); border-radius: 2px; }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  position: relative; overflow: hidden; padding: 100px 5% 80px;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(255,107,0,.12) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(232,0,61,.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 20% 20%, rgba(255,215,0,.06) 0%, transparent 50%);
+}
+.spotlight {
+  position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: conic-gradient(from 260deg, transparent 60deg, rgba(255,215,0,.07) 90deg, transparent 120deg);
+  animation: spotSway 7s ease-in-out infinite; pointer-events: none;
+}
+@keyframes spotSway { 0%,100%{transform:translateX(-50%) rotate(0deg);} 50%{transform:translateX(-50%) rotate(18deg);} }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,215,0,.1); border: 1px solid rgba(255,215,0,.3);
+  padding: 7px 18px; border-radius: 20px; margin-bottom: 24px;
+  font-size: .72rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+  opacity: 0; animation: fadeUp .8s .2s forwards;
+}
+.hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.5;transform:scale(1.4);} }
+.hero-title {
+  font-family: 'Bebas Neue',sans-serif;
+  font-size: clamp(4.5rem,13vw,9.5rem); line-height: .9; letter-spacing: 4px;
+  margin-bottom: 14px; opacity: 0; animation: fadeUp .8s .4s forwards;
+}
+.hero-title .line1 { color: var(--white); display: block; }
+.hero-title .line2 { display: block; background: linear-gradient(135deg,var(--gold) 0%,var(--orange) 50%,var(--red) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-tagline { font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: clamp(.88rem,2vw,1.1rem); letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; opacity: 0; animation: fadeUp .8s .5s forwards; }
+.hero-subtitle { font-size: clamp(.88rem,1.7vw,1.05rem); color: var(--grey); max-width: 580px; line-height: 1.85; margin-bottom: 44px; opacity: 0; animation: fadeUp .8s .65s forwards; }
+.hero-subtitle span { color: var(--white); font-weight: 600; }
+.hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fadeUp .8s .8s forwards; }
+.btn-primary {
+  background: linear-gradient(135deg,var(--red),var(--orange)); color: #fff; border: none; padding: 15px 38px;
+  font-family: 'Montserrat',sans-serif; font-weight: 800; font-size: .86rem; letter-spacing: 3px;
+  text-transform: uppercase; cursor: pointer;
+  clip-path: polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);
+  transition: all .3s; box-shadow: 0 8px 32px rgba(232,0,61,.35);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(232,0,61,.5); }
+.btn-secondary { background: transparent; color: var(--gold); border: 1.5px solid var(--gold); padding: 15px 38px; font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: .86rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: all .3s; }
+.btn-secondary:hover { background: rgba(255,215,0,.08); transform: translateY(-3px); }
+.btn-wa-hero { background: #25D366; color: #fff; border: none; padding: 15px 28px; font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: .86rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-radius: 4px; transition: all .3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+.btn-wa-hero:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(37,211,102,.4); }
+.hero-stats { display: flex; gap: 44px; margin-top: 60px; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fadeUp .8s 1s forwards; }
+.stat { text-align: center; }
+.stat-num { font-family: 'Bebas Neue',sans-serif; font-size: 2.8rem; line-height: 1; background: linear-gradient(135deg,var(--gold),var(--orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.stat-label { font-size: .66rem; letter-spacing: 2px; text-transform: uppercase; color: var(--grey); margin-top: 4px; }
+.stat-divider { width: 1px; background: rgba(255,255,255,.1); align-self: stretch; }
+
+/* ── TICKER ── */
+.ticker-wrap { background: linear-gradient(135deg,var(--red),var(--orange)); padding: 10px 0; overflow: hidden; white-space: nowrap; }
+.ticker { display: inline-block; animation: tick 30s linear infinite; font-family: 'Bebas Neue',sans-serif; font-size: 1rem; letter-spacing: 4px; }
+@keyframes tick { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
+.ti { margin: 0 32px; }
+.td { color: rgba(255,255,255,.4); margin: 0 6px; }
+
+/* ── SECTION BASE ── */
+section { padding: 88px 6%; }
+.section-label { font-size: .68rem; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--orange); margin-bottom: 14px; }
+.section-title { font-family: 'Bebas Neue',sans-serif; font-size: clamp(2.4rem,5vw,4.4rem); line-height: 1; letter-spacing: 2px; margin-bottom: 18px; }
+.section-desc { color: var(--grey); font-size: .93rem; line-height: 1.9; max-width: 540px; }
+.proposed-note { display: inline-block; background: rgba(255,215,0,.1); border: 1px solid rgba(255,215,0,.25); color: var(--gold); font-size: .68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 4px 12px; border-radius: 3px; margin-bottom: 12px; }
+
+/* ── PARENT TRUST BANNER ── */
+.trust-banner {
+  background: linear-gradient(135deg,rgba(34,197,94,.08),rgba(34,197,94,.03));
+  border: 1px solid rgba(34,197,94,.2); padding: 32px 5%;
+  display: flex; gap: 0; overflow-x: auto;
+}
+.trust-item {
+  flex: 1; min-width: 180px; display: flex; flex-direction: column; align-items: center;
+  text-align: center; padding: 20px 24px; border-right: 1px solid rgba(255,255,255,.06);
+}
+.trust-item:last-child { border-right: none; }
+.trust-icon { font-size: 2rem; margin-bottom: 12px; }
+.trust-item h4 { font-family: 'Montserrat',sans-serif; font-weight: 800; font-size: .82rem; margin-bottom: 6px; color: var(--white); }
+.trust-item p { font-size: .76rem; color: var(--grey); line-height: 1.6; }
+
+/* ── ABOUT ── */
+#about { background: var(--dark2); position: relative; overflow: hidden; }
+#about::before { content:''; position:absolute; top:-200px; right:-200px; width:600px; height:600px; border-radius:50%; background:radial-gradient(circle,rgba(255,107,0,.07) 0%,transparent 70%); pointer-events:none; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 52px; }
+.about-cards { display: flex; flex-direction: column; gap: 16px; }
+.about-card { background: var(--dark3); border: 1px solid rgba(255,255,255,.06); border-left: 3px solid var(--orange); padding: 22px 26px; transition: transform .3s, border-color .3s; }
+.about-card:hover { transform: translateX(8px); border-left-color: var(--gold); }
+.about-card h3 { font-family: 'Montserrat',sans-serif; font-weight: 800; font-size: .93rem; margin-bottom: 6px; }
+.about-card p { font-size: .82rem; color: var(--grey); line-height: 1.7; }
+.about-visual { display: flex; flex-direction: column; gap: 20px; align-items: center; }
+.mission-box { background: linear-gradient(135deg,rgba(255,215,0,.07),rgba(255,107,0,.04)); border: 1px solid rgba(255,215,0,.2); padding: 36px; text-align: center; width: 100%; }
+.mission-box .star { font-size: 3.5rem; margin-bottom: 16px; display: block; }
+.mission-box h3 { font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: .82rem; letter-spacing: 3px; text-transform: uppercase; color: var(--grey); margin-bottom: 12px; }
+.mission-box p { font-size: 1.1rem; font-weight: 600; color: var(--white); line-height: 1.65; font-style: italic; }
+.value-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.vtag { padding: 6px 14px; border: 1px solid rgba(255,215,0,.2); font-size: .7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+
+/* ── PARENT GUIDE ── */
+#parents { background: var(--dark); }
+.parents-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; margin-top: 52px; }
+.parent-steps { display: flex; flex-direction: column; gap: 0; }
+.ps-item { display: flex; gap: 20px; position: relative; }
+.ps-item:not(:last-child)::after { content:''; position:absolute; left:22px; top:46px; bottom:0; width:2px; background:linear-gradient(180deg,var(--orange),rgba(255,107,0,.1)); }
+.ps-num { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,107,0,.12); border: 2px solid var(--orange); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue',sans-serif; font-size: 1.2rem; color: var(--orange); flex-shrink: 0; position: relative; z-index: 1; }
+.ps-content { padding: 4px 0 32px; }
+.ps-content h4 { font-family: 'Montserrat',sans-serif; font-weight: 800; font-size: .92rem; margin-bottom: 6px; }
+.ps-content p { font-size: .82rem; color: var(--grey); line-height: 1.7; }
+.parent-faq-quick { display: flex; flex-direction: column; gap: 14px; }
+.pfq { background: var(--dark3); border: 1px solid rgba(255,255,255,.07); padding: 20px 22px; border-left: 3px solid var(--gold); }
+.pfq h4 { font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: .85rem; color: var(--gold); margin-bottom: 6px; }
+.pfq p { font-size: .8rem; color: var(--grey); line-height: 1.7; }
+.contact-quick { background: linear-gradient(135deg,rgba(37,211,102,.08),rgba(37,211,102,.03)); border: 1px solid rgba(37,211,102,.2); padding: 28px; margin-top: 20px; }
+.contact-quick h4 { font-family: 'Montserrat',sans-serif; font-weight: 800; font-size: .88rem; margin-bottom: 16px; color: var(--white); }
+.cq-item { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; text-decoration: none; transition: opacity .2s; }
+.cq-item:hover { opacity: .8; }
+.cq-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .9rem; flex-shrink: 0; }
+.cq-icon.ig { background: linear-gradient(135deg,#E1306C,#833AB4); }
+.cq-icon.wa { background: #25D366; }
+.cq-icon.ph { background: var(--orange); }
+.cq-text { font-size: .84rem; color: var(--white); font-weight: 600; }
+.cq-sub { font-size: .72rem; color: var(--grey); }
+
+/* ── AGE GROUPS ── */
+#ages { background: var(--dark2); }
+.ages-header { text-align: center; margin-bottom: 52px; }
+.ages-header .section-desc { margin: 0 auto; text-align: center; }
+.ages-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+.age-card { background: var(--dark3); border: 1px solid rgba(255,255,255,.07); padding: 32px 20px; text-align: center; transition: transform .3s; cursor: default; }
+.age-card:hover { transform: translateY(-6px); }
+.age-card:nth-child(1) { border-top: 2px solid var(--gold); }
+.age-card:nth-child(2) { border-top: 2px solid var(--orange); }
+.age-card:nth-child(3) { border-top: 2px solid var(--red); }
+.age-card:nth-child(4) { border-top: 2px solid #9B59B6; }
+.age-group-label { font-size: .68rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--grey); margin-bottom: 8px; }
+.age-range { font-family: 'Bebas Neue',sans-serif; font-size: 3rem; line-height: 1; margin-bottom: 4px; }
+.age-card:nth-child(1) .age-range { color: var(--gold); }
+.age-card:nth-child(2) .age-range { color: var(--orange); }
+.age-card:nth-child(3) .age-range { color: var(--red); }
+.age-card:nth-child(4) .age-range { color: #9B59B6; }
+.age-years { font-size: .78rem; color: var(--grey); letter-spacing: 2px; text-transform: uppercase; }
+.age-note { font-size: .74rem; color: rgba(255,255,255,.32); margin-top: 12px; line-height: 1.6; }
+.ages-disclaimer { background: rgba(255,215,0,.05); border: 1px solid rgba(255,215,0,.2); padding: 18px 24px; margin-top: 36px; text-align: center; }
+.ages-disclaimer p { font-size: .82rem; color: var(--grey); line-height: 1.75; }
+.ages-disclaimer strong { color: var(--gold); }
+
+/* ── CATEGORIES ── */
+#categories { background: var(--dark); }
+.cat-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; flex-wrap: wrap; gap: 20px; }
+.cat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-bottom: 28px; }
+.cat-card { background: var(--dark3); border: 1px solid rgba(255,255,255,.06); padding: 28px 24px; position: relative; overflow: hidden; transition: transform .3s; cursor: default; }
+.cat-card:hover { transform: translateY(-6px); }
+.cat-card:hover .cat-glow { opacity: 1; }
+.cat-glow { position: absolute; inset: 0; opacity: 0; transition: opacity .4s; pointer-events: none; }
+.cat-card:nth-child(1){ border-top:2px solid var(--gold); }
+.cat-card:nth-child(1) .cat-glow{ background:radial-gradient(circle at top left,rgba(255,215,0,.06),transparent 70%); }
+.cat-card:nth-child(2){ border-top:2px solid var(--orange); }
+.cat-card:nth-child(2) .cat-glow{ background:radial-gradient(circle at top left,rgba(255,107,0,.06),transparent 70%); }
+.cat-card:nth-child(3){ border-top:2px solid var(--red); }
+.cat-card:nth-child(3) .cat-glow{ background:radial-gradient(circle at top left,rgba(232,0,61,.06),transparent 70%); }
+.cat-card:nth-child(4){ border-top:2px solid #9B59B6; }
+.cat-card:nth-child(4) .cat-glow{ background:radial-gradient(circle at top left,rgba(155,89,182,.06),transparent 70%); }
+.cat-card:nth-child(5){ border-top:2px solid #1ABC9C; }
+.cat-card:nth-child(5) .cat-glow{ background:radial-gradient(circle at top left,rgba(26,188,156,.06),transparent 70%); }
+.cat-card:nth-child(6){ border-top:2px solid #3498DB; }
+.cat-card:nth-child(6) .cat-glow{ background:radial-gradient(circle at top left,rgba(52,152,219,.06),transparent 70%); }
+.cat-card:nth-child(7){ border-top:2px solid #F39C12; }
+.cat-card:nth-child(7) .cat-glow{ background:radial-gradient(circle at top left,rgba(243,156,18,.06),transparent 70%); }
+.cat-emoji { font-size: 2rem; margin-bottom: 12px; display: block; }
+.cat-card h3 { font-family: 'Montserrat',sans-serif; font-weight: 800; font-size: .95rem; margin-bottom: 8px; }
+.cat-card p { font-size: .8rem; color: var(--grey); line-height: 1.7; margin-bottom: 14px; }
+.cat-tag { display: inline-block; padding: 4px 10px; border: 1px solid rgba(255,255,255,.1); font-size: .66rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--grey); }
+.cat-judging { background: rgba(255,215,0,.04); border: 1px solid rgba(255,215,0,.15); padding: 26px; margin-top: 10px; }
+.cat-judging h4 { font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: .82rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.judge-criteria { display: flex; flex-direction: column; gap: 9px; }
+.jc-row { display: flex; align-items: center; gap: 12px; }
+.jc-label { font-size: .8rem; color: var(--grey); width: 210px; flex-shrink: 0; }
+.jc-bar { flex: 1; height: 6px; background: rgba(255,255,255,.08); border-radius: 3px; overflow: hidden; }
+.jc-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg,var(--gold),var(--orange)); }
+.jc-score { font-size: .82rem; font-weight: 700; color: var(--gold); width: 32px; text-align: right; }
+
+/* ── COMPETITION QUIZ ── */
+#quiz-section { background: var(--dark2); }
+.quiz-wrap { max-width: 720px; margin: 52px auto 0; }
+.quiz-card { background: var(--dark3); border: 1px solid rgba(255,215,0,.15); padding: 40px; text-align: center; position: relative; overflow: hidden; }
+.quiz-card::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(255,215,0,.05),transparent 70%); pointer-events:none; }
+.quiz-progress { display: flex; gap: 6px; justify-content: center; margin-bottom: 28px; }
+.qp-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.15); transition: background .3s; }
+.qp-dot.done { background: var(--green); }
+.qp-dot.active { background: var(--gold); }
+.quiz-q { font-family: 'Montserrat',sans-serif; font-weight: 800; font-size: 1.05rem; line-height: 1.6; margin-bottom: 28px; color: var(--white); min-height: 64px; }
+.quiz-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+.quiz-opt {
+  background: rgba(255,255,255,.05); border: 1.5px solid rgba(255,255,255,.12);
+  color: var(--white); padding: 14px 16px; font-family: 'Poppins',sans-serif;
+  font-size: .84rem; cursor: pointer; text-align: left; transition: all .25s; border-radius: 4px;
+}
+.quiz-opt:hover { border-color: var(--gold); background: rgba(255,215,0,.07); }
+.quiz-opt.correct { border-color: var(--green); background: rgba(34,197,94,.12); color: var(--green); }
+.quiz-opt.wrong { border-color: var(--red); background: rgba(232,0,61,.1); color: #ff6b6b; }
+.quiz-opt.disabled { pointer-events: none; }
+.quiz-feedback { font-size: .84rem; min-height: 28px; margin-bottom: 16px; font-weight: 600; }
+.quiz-feedback.ok { color: var(--green); }
+.quiz-feedback.no { color: #ff6b6b; }
+.quiz-next { background: linear-gradient(135deg,var(--red),var(--orange)); color: #fff; border: none; padding: 12px 36px; font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: .82rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; clip-path: polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%); display: none; transition: transform .2s; }
+.quiz-next:hover { transform: translateY(-2px); }
+.quiz-score { font-family: 'Bebas Neue',sans-serif; font-size: 4rem; color: var(--gold); margin: 16px 0 8px; }
+.quiz-result-msg { font-size: .9rem; color: var(--grey); margin-bottom: 24px; line-height: 1.7; }
+.quiz-restart { background: transparent; border: 1.5px solid var(--gold); color: var(--gold); padding: 10px 28px; font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all .3s; }
+.quiz-restart:hover { background: rgba(255,215,0,.08); }
+
+/* ── HOW IT WORKS ── */
+#how { background: var(--dark); }
+.how-header { text-align: center; margin-bottom: 60px; }
+.how-header .section-desc { margin: 0 auto; text-align: center; }
+.how-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; position: relative; }
+.how-steps::before { content:''; position:absolute; top:36px; left:12.5%; right:12.5%; height:2px; background:linear-gradient(90deg,transparent,var(--orange),var(--gold),var(--red),transparent); z-index:0; }
+.how-steps-2row { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; margin-top: 44px; position: relative; }
+.how-steps-2row::before { content:''; position:absolute; top:36px; left:12.5%; right:12.5%; height:2px; background:linear-gradient(90deg,transparent,var(--orange),var(--gold),var(--red),transparent); z-index:0; }
+.how-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 14px; position: relative; z-index: 1; }
+.how-num { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue',sans-serif; font-size: 1.6rem; margin-bottom: 18px; border: 2px solid; }
+.how-step:nth-child(1) .how-num{background:rgba(255,215,0,.1);border-color:var(--gold);color:var(--gold);}
+.how-step:nth-child(2) .how-num{background:rgba(255,107,0,.1);border-color:var(--orange);color:var(--orange);}
+.how-step:nth-child(3) .how-num{background:rgba(232,0,61,.1);border-color:var(--red);color:var(--red);}
+.how-step:nth-child(4) .how-num{background:rgba(155,89,182,.1);border-color:#9B59B6;color:#9B59B6;}
+.how-step:nth-child(5) .how-num{background:rgba(26,188,156,.1);border-color:#1ABC9C;color:#1ABC9C;}
+.how-step:nth-child(6) .how-num{background:rgba(52,152,219,.1);border-color:#3498DB;color:#3498DB;}
+.how-step:nth-child(7) .how-num{background:rgba(243,156,18,.1);border-color:#F39C12;color:#F39C12;}
+.how-step:nth-child(8) .how-num{background:rgba(255,215,0,.15);border-color:var(--gold);color:var(--gold);box-shadow:0 0 24px rgba(255,215,0,.25);}
+.how-step h3 { font-family: 'Montserrat',sans-serif; font-weight: 800; font-size: .84rem; margin-bottom: 6px; }
+.how-step p { font-size: .76rem; color: var(--grey); line-height: 1.6; }
+
+/* ── AWARDS ── */
+#awards { background: var(--dark2); }
+.awards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; margin-top: 52px; }
+.district-award { background: linear-gradient(135deg,rgba(255,215,0,.07),rgba(255,107,0,.04)); border: 1px solid rgba(255,215,0,.2); padding: 44px; text-align: center; }
+.district-award .crown { font-size: 3.8rem; margin-bottom: 16px; display: block; }
+.district-award h3 { font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: .82rem; letter-spacing: 3px; text-transform: uppercase; color: var(--grey); margin-bottom: 8px; }
+.award-title-big { font-family: 'Bebas Neue',sans-serif; font-size: 2.2rem; line-height: 1.1; background: linear-gradient(135deg,var(--gold),var(--orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 6px; }
+.award-prize { font-family: 'Bebas Neue',sans-serif; font-size: 3rem; line-height: 1; color: var(--gold); margin-bottom: 6px; }
+.award-prize-note { font-size: .72rem; color: rgba(255,215,0,.5); font-style: italic; margin-bottom: 18px; }
+.award-benefits { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; }
+.award-tag { padding: 5px 12px; border: 1px solid rgba(255,215,0,.25); font-size: .68rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); }
+.runner-cards { display: flex; flex-direction: column; gap: 14px; }
+.runner-card { background: var(--dark3); border: 1px solid rgba(255,255,255,.07); padding: 24px 28px; display: flex; align-items: center; gap: 20px; }
+.runner-medal { font-size: 2.2rem; flex-shrink: 0; }
+.runner-info h4 { font-family: 'Montserrat',sans-serif; font-weight: 800; font-size: .9rem; margin-bottom: 3px; }
+.runner-info .runner-prize { font-family: 'Bebas Neue',sans-serif; font-size: 1.7rem; color: var(--orange); line-height: 1; }
+.runner-info .runner-note { font-size: .7rem; color: rgba(255,165,0,.5); font-style: italic; }
+.category-awards { margin-top: 44px; }
+.category-awards h3 { font-family: 'Bebas Neue',sans-serif; font-size: 1.7rem; letter-spacing: 3px; margin-bottom: 24px; }
+.cat-award-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.cat-award-card { background: var(--dark3); border: 1px solid rgba(255,255,255,.06); padding: 20px 18px; }
+.cat-award-card .pos { font-size: 1.3rem; margin-bottom: 7px; }
+.cat-award-card h4 { font-family: 'Montserrat',sans-serif; font-weight: 800; font-size: .82rem; margin-bottom: 3px; }
+.cat-award-card p { font-size: .76rem; color: var(--grey); }
+
+/* ── REGISTER ── */
+#register { background: linear-gradient(135deg,#0D0D0D 0%,#1A0A00 50%,#0D0D0D 100%); position: relative; overflow: hidden; }
+#register::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(255,107,0,.1) 0%,transparent 70%); pointer-events:none; }
+.reg-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: start; position: relative; z-index: 1; }
+.reg-info { padding-top: 6px; }
+.reg-fee-box { background: rgba(255,215,0,.08); border: 1px solid rgba(255,215,0,.25); padding: 26px; margin: 26px 0; }
+.reg-fee-box .fee-label { font-size: .68rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--grey); margin-bottom: 5px; }
+.reg-fee-box .fee-amount { font-family: 'Bebas Neue',sans-serif; font-size: 4rem; color: var(--gold); line-height: 1; }
+.reg-fee-box .fee-desc { font-size: .78rem; color: var(--grey); margin-top: 6px; line-height: 1.65; }
+.reg-includes { display: flex; flex-direction: column; gap: 9px; }
+.reg-include-item { display: flex; align-items: flex-start; gap: 9px; font-size: .82rem; color: var(--grey); line-height: 1.55; }
+.reg-include-item .tick { color: var(--green); font-size: .95rem; flex-shrink: 0; margin-top: 2px; }
+.reg-whatsapp { background: rgba(37,211,102,.1); border: 1px solid rgba(37,211,102,.25); padding: 18px 22px; margin-top: 24px; display: flex; align-items: center; gap: 14px; text-decoration: none; transition: background .3s; }
+.reg-whatsapp:hover { background: rgba(37,211,102,.16); }
+.reg-whatsapp .wa-icon { font-size: 1.6rem; flex-shrink: 0; }
+.reg-whatsapp h4 { font-family: 'Montserrat',sans-serif; font-weight: 800; font-size: .84rem; color: #25D366; margin-bottom: 3px; }
+.reg-whatsapp p { font-size: .76rem; color: var(--grey); }
+.reg-form-wrap { background: var(--dark3); border: 1px solid rgba(255,255,255,.08); padding: 36px; }
+.reg-form-wrap h3 { font-family: 'Bebas Neue',sans-serif; font-size: 1.5rem; letter-spacing: 3px; margin-bottom: 24px; color: var(--gold); }
+.form-section-label { font-size: .66rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin: 18px 0 12px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label { font-size: .68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--grey); }
+.form-group input,.form-group select,.form-group textarea { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); color: var(--white); padding: 11px 14px; font-family: 'Poppins',sans-serif; font-size: .82rem; outline: none; transition: border-color .3s; width: 100%; }
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus { border-color: var(--orange); }
+.form-group input::placeholder,.form-group textarea::placeholder { color: rgba(255,255,255,.22); }
+.form-group select option { background: var(--dark3); }
+.consent-group { display: flex; gap: 10px; align-items: flex-start; }
+.consent-group input[type=checkbox] { margin-top: 3px; accent-color: var(--orange); flex-shrink: 0; }
+.consent-group label { font-size: .76rem; color: var(--grey); line-height: 1.65; cursor: pointer; }
+.consent-group label a { color: var(--orange); text-decoration: underline; }
+.form-submit { width: 100%; margin-top: 22px; background: linear-gradient(135deg,var(--red),var(--orange)); color: #fff; border: none; padding: 16px; font-family: 'Montserrat',sans-serif; font-weight: 800; font-size: .88rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: all .3s; box-shadow: 0 8px 28px rgba(232,0,61,.3); }
+.form-submit:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(232,0,61,.5); }
+.form-disclaimer { font-size: .7rem; color: rgba(255,255,255,.22); margin-top: 12px; text-align: center; line-height: 1.65; }
+
+/* ── EXPANSION ── */
+#expansion { background: var(--dark); }
+.expansion-header { text-align: center; margin-bottom: 60px; }
+.expansion-header .section-desc { margin: 0 auto; text-align: center; }
+.roadmap { display: flex; flex-direction: column; max-width: 780px; margin: 0 auto; }
+.road-phase { display: flex; gap: 24px; align-items: flex-start; position: relative; }
+.road-phase:not(:last-child)::after { content:''; position:absolute; left:22px; top:48px; bottom:-12px; width:2px; background:linear-gradient(180deg,var(--orange),rgba(255,107,0,.1)); }
+.road-dot { width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1rem; margin-top: 3px; position: relative; z-index: 1; border: 2px solid; }
+.road-phase:nth-child(1) .road-dot{background:rgba(255,215,0,.15);border-color:var(--gold);}
+.road-phase:nth-child(2) .road-dot{background:rgba(255,107,0,.15);border-color:var(--orange);}
+.road-phase:nth-child(3) .road-dot{background:rgba(232,0,61,.15);border-color:var(--red);}
+.road-phase:nth-child(4) .road-dot{background:rgba(155,89,182,.15);border-color:#9B59B6;}
+.road-phase:nth-child(5) .road-dot{background:rgba(26,188,156,.15);border-color:#1ABC9C;}
+.road-phase:nth-child(6) .road-dot{background:rgba(255,215,0,.2);border-color:var(--gold);box-shadow:0 0 20px rgba(255,215,0,.3);}
+.road-content { padding: 4px 0 32px; }
+.road-phase-tag { font-size: .66rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; }
+.road-content h3 { font-family: 'Montserrat',sans-serif; font-weight: 800; font-size: .96rem; margin-bottom: 5px; }
+.road-content p { font-size: .81rem; color: var(--grey); line-height: 1.7; }
+.road-status { display: inline-block; margin-top: 7px; padding: 3px 10px; font-size: .64rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border-radius: 3px; }
+.status-active { background: rgba(34,197,94,.15); color: var(--green); border: 1px solid rgba(34,197,94,.3); }
+.status-planned { background: rgba(255,255,255,.05); color: var(--grey); border: 1px solid rgba(255,255,255,.1); }
+
+/* ── FAQ ── */
+#faq { background: var(--dark2); }
+.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 48px; }
+.faq-item { background: var(--dark3); border: 1px solid rgba(255,255,255,.06); }
+.faq-q { padding: 18px 22px; font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: .84rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: color .3s; }
+.faq-q:hover { color: var(--gold); }
+.faq-arrow { font-size: 1.1rem; transition: transform .3s; flex-shrink: 0; }
+.faq-a { padding: 0 22px; max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .4s ease; }
+.faq-item.open .faq-a { max-height: 300px; padding: 0 22px 18px; }
+.faq-item.open .faq-arrow { transform: rotate(45deg); }
+.faq-a p { font-size: .81rem; color: var(--grey); line-height: 1.75; }
+.faq-a .placeholder { color: rgba(255,165,0,.6); font-style: italic; }
+
+/* ── PARTNERS ── */
+#partners { background: var(--dark); }
+.partners-header { text-align: center; margin-bottom: 52px; }
+.partner-tiers { display: flex; flex-direction: column; gap: 40px; }
+.tier-label { font-size: .66rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--grey); text-align: center; margin-bottom: 18px; }
+.partner-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.partner-box { background: var(--dark3); border: 1px solid rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; padding: 20px 34px; transition: border-color .3s, transform .3s; cursor: default; }
+.partner-box:hover { border-color: rgba(255,215,0,.3); transform: translateY(-4px); }
+.partner-name { font-family: 'Montserrat',sans-serif; font-weight: 800; font-size: .95rem; letter-spacing: 2px; color: rgba(255,255,255,.28); text-transform: uppercase; transition: color .3s; }
+.partner-box:hover .partner-name { color: rgba(255,255,255,.6); }
+.partner-box.gold-sponsor { border-color: rgba(255,215,0,.2); }
+.partner-box.gold-sponsor .partner-name { color: rgba(255,215,0,.45); font-size: 1.2rem; }
+.partner-box.gold-sponsor:hover .partner-name { color: var(--gold); }
+.become-partner { text-align: center; margin-top: 48px; padding: 40px; border: 1px dashed rgba(255,255,255,.1); }
+.become-partner h3 { font-family: 'Bebas Neue',sans-serif; font-size: 1.8rem; letter-spacing: 3px; margin-bottom: 10px; }
+.become-partner p { color: var(--grey); font-size: .84rem; margin-bottom: 24px; }
+
+/* ── CONTACT ── */
+#contact { background: var(--dark2); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 52px; }
+.contact-info { display: flex; flex-direction: column; gap: 20px; }
+.contact-item { display: flex; gap: 16px; align-items: flex-start; }
+.contact-icon { width: 44px; height: 44px; background: rgba(255,215,0,.08); border: 1px solid rgba(255,215,0,.2); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.contact-item h4 { font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: 2px; text-transform: uppercase; color: var(--grey); margin-bottom: 4px; }
+.contact-item a,.contact-item p { font-size: .86rem; color: var(--white); text-decoration: none; transition: color .2s; }
+.contact-item a:hover { color: var(--gold); }
+.contact-item .placeholder-text { color: rgba(255,165,0,.6); font-style: italic; font-size: .82rem; }
+.contact-form { display: flex; flex-direction: column; gap: 14px; }
+.contact-form input,.contact-form textarea { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); color: var(--white); padding: 13px 16px; font-family: 'Poppins',sans-serif; font-size: .84rem; outline: none; transition: border-color .3s; }
+.contact-form input:focus,.contact-form textarea:focus { border-color: var(--orange); }
+.contact-form input::placeholder,.contact-form textarea::placeholder { color: rgba(255,255,255,.22); }
+.policy-links { background: rgba(255,215,0,.04); border: 1px solid rgba(255,215,0,.15); padding: 22px; margin-top: 6px; }
+.policy-links h4 { font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.policy-links a { display: block; color: var(--grey); font-size: .81rem; text-decoration: none; margin-bottom: 8px; transition: color .2s; }
+.policy-links a:hover { color: var(--gold); }
+
+/* ── SAFETY STRIP ── */
+.safety-strip { background: rgba(34,197,94,.05); border-top: 1px solid rgba(34,197,94,.15); border-bottom: 1px solid rgba(34,197,94,.15); padding: 26px 5%; display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; align-items: center; }
+.safety-item { display: flex; align-items: center; gap: 9px; font-size: .78rem; color: rgba(255,255,255,.55); }
+.safety-item .sicon { font-size: 1.1rem; }
+
+/* ── FOOTER ── */
+footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,.06); padding: 52px 6% 32px; }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; flex-wrap: wrap; gap: 32px; }
+.footer-brand .logo-footer { font-family: 'Bebas Neue',sans-serif; font-size: 1.9rem; letter-spacing: 3px; background: linear-gradient(135deg,var(--gold),var(--orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block; margin-bottom: 10px; }
+.footer-brand p { color: var(--grey); font-size: .81rem; max-width: 260px; line-height: 1.7; }
+.footer-social { display: flex; gap: 12px; margin-top: 16px; }
+.fs-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .9rem; text-decoration: none; transition: transform .2s, box-shadow .2s; }
+.fs-icon.ig { background: linear-gradient(135deg,#E1306C,#833AB4,#F77737); }
+.fs-icon.wa { background: #25D366; }
+.fs-icon.ph { background: var(--orange); }
+.fs-icon:hover { transform: scale(1.15); box-shadow: 0 4px 16px rgba(255,255,255,.2); }
+.footer-links h4 { font-size: .68rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--white); margin-bottom: 16px; }
+.footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer-links a { color: var(--grey); text-decoration: none; font-size: .81rem; transition: color .2s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.06); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.footer-bottom p { font-size: .74rem; color: rgba(255,255,255,.2); }
+.footer-bottom span { color: var(--orange); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px);} to{opacity:1;transform:translateY(0);} }
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .about-grid,.reg-grid,.awards-grid,.contact-grid,.parents-grid{grid-template-columns:1fr;gap:40px;}
+  .how-steps,.how-steps-2row{grid-template-columns:repeat(2,1fr);gap:36px;}
+  .how-steps::before,.how-steps-2row::before{display:none;}
+  .ages-grid{grid-template-columns:repeat(2,1fr);}
+  .cat-grid{grid-template-columns:1fr 1fr;}
+  .cat-award-grid{grid-template-columns:1fr 1fr;}
+  .trust-banner{flex-wrap:wrap;}
+}
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(10,10,10,.97);flex-direction:column;padding:22px 5%;gap:18px;border-bottom:1px solid rgba(255,215,0,.1);}
+  .nav-links.open{display:flex;}
+  .hamburger{display:flex;}
+  .nav-wa{display:none;}
+  .faq-grid,.cat-grid,.cat-award-grid,.form-row,.quiz-opts{grid-template-columns:1fr;}
+  .how-steps,.how-steps-2row{grid-template-columns:1fr;}
+  .ages-grid{grid-template-columns:1fr 1fr;}
+  .social-float{display:none;}
+}
+@media(max-width:480px){
+  .hero-stats{gap:20px;} .stat-divider{display:none;}
+  .ages-grid{grid-template-columns:1fr;}
+  section{padding:68px 5%;}
+}
+</style>
 </head>
 <body>
-<h1>Talented Star</h1>
-<p>Ujjain District Talent Championship 2026</p>
+
+<!-- FLOATING SOCIAL BAR -->
+<div class="social-float">
+  <a href="https://www.instagram.com/talentedstar975" target="_blank" class="sf-btn ig">📸<span class="sf-label">Instagram</span></a>
+  <a href="https://wa.me/918962836674" target="_blank" class="sf-btn wa">💬<span class="sf-label">WhatsApp</span></a>
+  <a href="tel:+918962836674" class="sf-btn ph">📞<span class="sf-label">Call Us</span></a>
+</div>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce-bar">
+  <span>🌟 Ujjain District Talent Championship 2026 — Registrations Opening Soon!</span>
+  <span class="sep">|</span>
+  <a href="https://wa.me/918962836674">📱 WhatsApp: +91-8962836674</a>
+  <span class="sep">|</span>
+  <a href="https://www.instagram.com/talentedstar975" target="_blank">📸 @talentedstar975</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="logo">TALENTED STAR</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#parents">For Parents</a></li>
+    <li><a href="#categories">Categories</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://wa.me/918962836674" target="_blank" class="nav-wa">💬 WhatsApp</a>
+    <button class="nav-cta" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Register Child</button>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="spotlight"></div>
+  <div class="hero-badge"><span class="dot"></span>Now Launching — Ujjain District 2026</div>
+  <h1 class="hero-title">
+    <span class="line1">TALENTED</span>
+    <span class="line2">STAR</span>
+  </h1>
+  <p class="hero-tagline">Every Child Has a Talent. Every Talent Deserves a Stage.</p>
+  <p class="hero-subtitle">
+    Join <span>Talented Star — Ujjain District Talent Championship 2026</span> — a safe, fair, and exciting platform where children aged 5–16 showcase creativity, confidence, and imagination.
+  </p>
+  <div class="hero-buttons">
+    <button class="btn-primary" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Register Your Child — ₹500</button>
+    <a href="https://wa.me/918962836674" target="_blank" class="btn-wa-hero">💬 Ask on WhatsApp</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">7</div><div class="stat-label">Categories</div></div>
+    <div class="stat-divider"></div>
+    <div class="stat"><div class="stat-num">5–16</div><div class="stat-label">Age Range</div></div>
+    <div class="stat-divider"></div>
+    <div class="stat"><div class="stat-num">₹500</div><div class="stat-label">Registration Fee</div></div>
+    <div class="stat-divider"></div>
+    <div class="stat"><div class="stat-num">₹</div><div class="stat-label">Prize Pool</div></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ti">TALENTED STAR</span><span class="td">◆</span>
+    <span class="ti">UJJAIN DISTRICT CHAMPIONSHIP 2026</span><span class="td">◆</span>
+    <span class="ti">AGES 5–16 · 7 CATEGORIES</span><span class="td">◆</span>
+    <span class="ti">📸 @TALENTEDSTAR975</span><span class="td">◆</span>
+    <span class="ti">📞 +91-8962836674</span><span class="td">◆</span>
+    <span class="ti">₹500 REGISTRATION</span><span class="td">◆</span>
+    <span class="ti">EVERY CHILD HAS A TALENT</span><span class="td">◆</span>
+    <span class="ti">TALENTED STAR</span><span class="td">◆</span>
+    <span class="ti">UJJAIN DISTRICT CHAMPIONSHIP 2026</span><span class="td">◆</span>
+    <span class="ti">AGES 5–16 · 7 CATEGORIES</span><span class="td">◆</span>
+    <span class="ti">📸 @TALENTEDSTAR975</span><span class="td">◆</span>
+    <span class="ti">📞 +91-8962836674</span><span class="td">◆</span>
+    <span class="ti">₹500 REGISTRATION</span><span class="td">◆</span>
+    <span class="ti">EVERY CHILD HAS A TALENT</span><span class="td">◆</span>
+  </div>
+</div>
+
+<!-- PARENT TRUST BANNER -->
+<div class="trust-banner">
+  <div class="trust-item"><div class="trust-icon">🛡️</div><h4>100% Safe for Children</h4><p>Parent/guardian registration required. Children's data never shared publicly.</p></div>
+  <div class="trust-item"><div class="trust-icon">⚖️</div><h4>Fair & Transparent Judging</h4><p>Published criteria before the event. No bias, no surprises.</p></div>
+  <div class="trust-item"><div class="trust-icon">📜</div><h4>Every Child Recognised</h4><p>All participants receive a certificate regardless of rank.</p></div>
+  <div class="trust-item"><div class="trust-icon">💬</div><h4>Always Reachable</h4><p>Call or WhatsApp us anytime: +91-8962836674</p></div>
+  <div class="trust-item"><div class="trust-icon">📸</div><h4>Follow Us on Instagram</h4><p>Updates, schedules & highlights @talentedstar975</p></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <p class="section-label">Who We Are</p>
+      <h2 class="section-title">MORE THAN A COMPETITION.</h2>
+      <p class="section-desc">Talented Star is a children's talent discovery platform built to give every child — regardless of background — a fair, safe, and memorable stage to shine.</p>
+      <div class="about-cards" style="margin-top:30px;">
+        <div class="about-card"><h3>🎯 Our Mission</h3><p>To help children discover, express, and develop their talents while building confidence, creativity, communication, and stage presence.</p></div>
+        <div class="about-card"><h3>🌍 Our Vision</h3><p>Starting in Ujjain and expanding across Madhya Pradesh, Uttar Pradesh, and eventually the entire nation — one district at a time.</p></div>
+        <div class="about-card"><h3>🤝 Equal Opportunity</h3><p>Every child who participates is treated with respect. Winning is an achievement, but every child deserves a positive and encouraging experience.</p></div>
+        <div class="about-card"><h3>🛡️ Child Safety First</h3><p>Parent/guardian involvement is required at every step. Photo and video consent is always separate and optional — never compulsory.</p></div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="mission-box">
+        <span class="star">⭐</span>
+        <h3>Core Brand Message</h3>
+        <p>"Every Child Has a Talent. Every Talent Deserves a Stage."</p>
+      </div>
+      <div class="value-tags">
+        <span class="vtag">Creativity</span><span class="vtag">Confidence</span>
+        <span class="vtag">Equal Opportunity</span><span class="vtag">Fair Competition</span>
+        <span class="vtag">Child Development</span><span class="vtag">Recognition</span>
+        <span class="vtag">Safety & Inclusion</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR PARENTS -->
+<section id="parents">
+  <p class="section-label">For Parents & Guardians</p>
+  <h2 class="section-title">EVERYTHING YOU NEED<br>TO KNOW.</h2>
+  <div class="parents-grid">
+    <div>
+      <p class="section-desc" style="margin-bottom:32px;">We understand that sending your child to a competition can feel overwhelming. Here's a simple guide to how it works — and we're always one WhatsApp away if you have any questions.</p>
+      <div class="parent-steps">
+        <div class="ps-item"><div class="ps-num">1</div><div class="ps-content"><h4>You Choose the Category</h4><p>Pick from 7 talent categories. Your child competes only in their age group — no unfair matchups.</p></div></div>
+        <div class="ps-item"><div class="ps-num">2</div><div class="ps-content"><h4>You Register & Pay ₹500</h4><p>Fill the form with your child's details and yours. Pay the ₹500 fee and get a participant ID by confirmation.</p></div></div>
+        <div class="ps-item"><div class="ps-num">3</div><div class="ps-content"><h4>We Share Event Details</h4><p>You'll receive the venue, schedule, dress code, and performance rules well in advance.</p></div></div>
+        <div class="ps-item"><div class="ps-num">4</div><div class="ps-content"><h4>Your Child Performs</h4><p>Judged on published criteria — talent, creativity, confidence, presentation, and discipline. Full transparency.</p></div></div>
+        <div class="ps-item" style=""><div class="ps-num">5</div><div class="ps-content" style="padding-bottom:0;"><h4>Every Child is Recognised</h4><p>All participants receive a certificate. Winners get their prize, trophy, and certificate on stage.</p></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="parent-faq-quick">
+        <div class="pfq"><h4>Is my child's personal data safe?</h4><p>Yes. Your child's date of birth, phone number and address are never displayed publicly. Only authorised staff can access registration data.</p></div>
+        <div class="pfq"><h4>Is the photo/video consent compulsory?</h4><p>No — it's always optional and separate. Your child can participate fully without giving media consent.</p></div>
+        <div class="pfq"><h4>What if my child is nervous on stage?</h4><p>That's completely normal! Our team ensures a warm, encouraging environment. Every child is cheered — not just the winners.</p></div>
+        <div class="pfq"><h4>Can I stay with my child at the venue?</h4><p>Yes. Parents and guardians are welcome and encouraged to be present throughout the event for comfort and safety.</p></div>
+      </div>
+      <div class="contact-quick">
+        <h4>📞 Have a Question? Reach Us Directly</h4>
+        <a href="https://wa.me/918962836674" target="_blank" class="cq-item">
+          <div class="cq-icon wa">💬</div>
+          <div><div class="cq-text">WhatsApp Us</div><div class="cq-sub">+91-8962836674 — Quick replies</div></div>
+        </a>
+        <a href="tel:+918962836674" class="cq-item">
+          <div class="cq-icon ph">📞</div>
+          <div><div class="cq-text">Call Us</div><div class="cq-sub">+91-8962836674</div></div>
+        </a>
+        <a href="https://www.instagram.com/talentedstar975" target="_blank" class="cq-item">
+          <div class="cq-icon ig">📸</div>
+          <div><div class="cq-text">Instagram DM</div><div class="cq-sub">@talentedstar975</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGE GROUPS -->
+<section id="ages">
+  <div class="ages-header">
+    <p class="section-label">Who Can Participate</p>
+    <h2 class="section-title">4 AGE GROUPS.<br><span style="color:var(--gold)">ONE STAGE.</span></h2>
+    <p class="section-desc">Children aged 5 to 16 compete in age-appropriate groups — so every child faces peers at the same stage of development. Fair, always.</p>
+  </div>
+  <div class="ages-grid">
+    <div class="age-card"><div class="age-group-label">Group A</div><div class="age-range">5–7</div><div class="age-years">Years</div><p class="age-note">Early explorers building confidence on their first big stage.</p></div>
+    <div class="age-card"><div class="age-group-label">Group B</div><div class="age-range">8–10</div><div class="age-years">Years</div><p class="age-note">Growing performers ready to express with energy and enthusiasm.</p></div>
+    <div class="age-card"><div class="age-group-label">Group C</div><div class="age-range">11–13</div><div class="age-years">Years</div><p class="age-note">Developing talent with stronger stage presence and spirit.</p></div>
+    <div class="age-card"><div class="age-group-label">Group D</div><div class="age-range">14–16</div><div class="age-years">Years</div><p class="age-note">Senior competitors with polished and compelling performances.</p></div>
+  </div>
+  <div class="ages-disclaimer">
+    <p><strong>Important:</strong> Final age eligibility rules, official cut-off date, and category availability per age group will be published in the official rules before registrations are confirmed. Your child's date of birth will verify eligibility.</p>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section id="categories">
+  <div class="cat-header">
+    <div>
+      <p class="section-label">Competition Categories</p>
+      <h2 class="section-title">7 ARENAS.<br>ONE CHAMPION.</h2>
+    </div>
+    <p class="section-desc" style="max-width:300px;">Every talent has a home here. Pick your category and let your child shine.</p>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card"><div class="cat-glow"></div><span class="cat-emoji">🎤</span><h3>Singing</h3><p>Solo vocal in any style — classical, Bollywood, folk, or devotional. Subject to event time limits.</p><span class="cat-tag">Solo · All Age Groups</span></div>
+    <div class="cat-card"><div class="cat-glow"></div><span class="cat-emoji">💃</span><h3>Dancing</h3><p>Individual dance in any form — showcasing expression, rhythm, technique, and creativity.</p><span class="cat-tag">Solo · All Age Groups</span></div>
+    <div class="cat-card"><div class="cat-glow"></div><span class="cat-emoji">🎭</span><h3>Drama & Acting</h3><p>Acting, monologues, role-play, and approved dramatic performances that bring stories to life.</p><span class="cat-tag">Solo · All Age Groups</span></div>
+    <div class="cat-card"><div class="cat-glow"></div><span class="cat-emoji">🎨</span><h3>Poster Presentation</h3><p>Creative poster on an assigned topic plus a short oral explanation. Judged on creativity, relevance, and presentation.</p><span class="cat-tag">Solo · All Age Groups</span></div>
+    <div class="cat-card"><div class="cat-glow"></div><span class="cat-emoji">🧠</span><h3>Memory Challenge</h3><p>Age-appropriate memory tests — recall, recognition, sequencing. Scored on accuracy and performance.</p><span class="cat-tag">Solo · Age-Appropriate Format</span></div>
+    <div class="cat-card"><div class="cat-glow"></div><span class="cat-emoji">♟️</span><h3>Mind Games</h3><p>Logic puzzles, reasoning challenges, and mental skill games tailored per age group.</p><span class="cat-tag">Solo · Age-Appropriate Format</span></div>
+    <div class="cat-card" style="grid-column:1/-1;max-width:calc(66.66% - 9px);"><div class="cat-glow"></div><span class="cat-emoji">✨</span><h3>Unique Talent</h3><p>For children whose gift doesn't fit elsewhere — magic, instrument, juggling, puppetry, or any special skill. Organiser approval and safety requirements apply.</p><span class="cat-tag">Solo · Prior Approval Required</span></div>
+  </div>
+  <div class="cat-judging">
+    <h4>Judging Framework — Performance Categories</h4>
+    <div class="judge-criteria">
+      <div class="jc-row"><span class="jc-label">Talent & Skill</span><div class="jc-bar"><div class="jc-fill" style="width:30%"></div></div><span class="jc-score">30</span></div>
+      <div class="jc-row"><span class="jc-label">Creativity</span><div class="jc-bar"><div class="jc-fill" style="width:20%"></div></div><span class="jc-score">20</span></div>
+      <div class="jc-row"><span class="jc-label">Confidence</span><div class="jc-bar"><div class="jc-fill" style="width:20%"></div></div><span class="jc-score">20</span></div>
+      <div class="jc-row"><span class="jc-label">Presentation</span><div class="jc-bar"><div class="jc-fill" style="width:20%"></div></div><span class="jc-score">20</span></div>
+      <div class="jc-row"><span class="jc-label">Discipline & Time Management</span><div class="jc-bar"><div class="jc-fill" style="width:10%"></div></div><span class="jc-score">10</span></div>
+    </div>
+    <p style="font-size:.74rem;color:var(--grey);margin-top:14px;">Memory Challenge & Mind Games use a separate accuracy-based scoring system. Detailed criteria published in official rules.</p>
+  </div>
+</section>
+
+<!-- COMPETITION QUIZ -->
+<section id="quiz-section">
+  <div style="text-align:center;margin-bottom:16px;">
+    <p class="section-label">Test Your Knowledge</p>
+    <h2 class="section-title">THINK YOU KNOW<br><span style="color:var(--gold)">TALENTED STAR?</span></h2>
+    <p class="section-desc" style="margin:0 auto;text-align:center;">Parents & kids — take this quick 5-question quiz about the competition and see if you're ready to register!</p>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-card" id="quizCard">
+      <div class="quiz-progress" id="quizProgress"></div>
+      <div class="quiz-q" id="quizQ"></div>
+      <div class="quiz-opts" id="quizOpts"></div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+      <button class="quiz-next" id="quizNext" onclick="nextQ()">Next Question →</button>
+      <div id="quizResult" style="display:none;">
+        <div class="quiz-score" id="quizScore"></div>
+        <div class="quiz-result-msg" id="quizMsg"></div>
+        <button class="quiz-restart" onclick="startQuiz()">Try Again</button>
+        <button class="btn-primary" style="margin-left:12px;" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Register Now →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="how-header">
+    <p class="section-label">The Process</p>
+    <h2 class="section-title">HOW IT WORKS</h2>
+    <p class="section-desc">From registration to recognition — your child's journey to becoming a Talented Star.</p>
+  </div>
+  <div class="how-steps">
+    <div class="how-step"><div class="how-num">1</div><h3>Explore Categories</h3><p>Browse all 7 categories and find the best fit for your child's talent and age group.</p></div>
+    <div class="how-step"><div class="how-num">2</div><h3>Select Category</h3><p>Choose the right category and confirm your child's age group eligibility.</p></div>
+    <div class="how-step"><div class="how-num">3</div><h3>Register & Pay ₹500</h3><p>Complete the registration form with parent details and pay the fee.</p></div>
+    <div class="how-step"><div class="how-num">4</div><h3>Receive Confirmation</h3><p>Get your Participant ID and confirmation after payment is verified.</p></div>
+  </div>
+  <div class="how-steps-2row">
+    <div class="how-step"><div class="how-num">5</div><h3>Review Instructions</h3><p>Read the official schedule, rules, and performance guidelines sent to you.</p></div>
+    <div class="how-step"><div class="how-num">6</div><h3>Compete!</h3><p>Attend the event, perform with full confidence and joy.</p></div>
+    <div class="how-step"><div class="how-num">7</div><h3>Results Announced</h3><p>Transparent results published officially after evaluation.</p></div>
+    <div class="how-step"><div class="how-num">8</div><h3>Get Recognised</h3><p>All get a certificate. Winners receive award, trophy, and prize on stage.</p></div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <p class="section-label">Recognition & Prizes</p>
+  <h2 class="section-title">AWARDS THAT MATTER.</h2>
+  <div class="proposed-note">⚠ Prize amounts are proposed — subject to official confirmation before the event</div>
+  <div class="awards-grid">
+    <div>
+      <div class="district-award">
+        <span class="crown">👑</span>
+        <h3>Overall District Champion</h3>
+        <div class="award-title-big">TALENTED STAR<br>UJJAIN DISTRICT</div>
+        <div class="award-prize">₹10,000</div>
+        <p class="award-prize-note">Proposed — subject to official confirmation</p>
+        <div class="award-benefits">
+          <span class="award-tag">₹ Cash Prize</span><span class="award-tag">Champion Trophy</span>
+          <span class="award-tag">Winner Certificate</span><span class="award-tag">District Recognition</span>
+          <span class="award-tag">Digital Profile*</span>
+        </div>
+        <p style="font-size:.7rem;color:rgba(255,255,255,.22);margin-top:12px;">* Subject to parent/guardian consent</p>
+      </div>
+      <div style="margin-top:14px;padding:14px 18px;background:rgba(255,215,0,.04);border:1px solid rgba(255,215,0,.12);">
+        <p style="font-size:.77rem;color:var(--grey);line-height:1.7;">Optional titles <strong style="color:var(--white);">Mr. Talented Star – Ujjain</strong> and <strong style="color:var(--white);">Miss Talented Star – Ujjain</strong> based on confidence, creativity, communication, and presentation — not appearance alone.</p>
+      </div>
+    </div>
+    <div>
+      <div class="runner-cards">
+        <div class="runner-card"><span class="runner-medal">🥈</span><div class="runner-info"><h4>First Runner-up</h4><div class="runner-prize">₹5,000</div><div class="runner-note">Proposed — subject to confirmation</div></div></div>
+        <div class="runner-card"><span class="runner-medal">🥉</span><div class="runner-info"><h4>Second Runner-up</h4><div class="runner-prize">₹3,000</div><div class="runner-note">Proposed — subject to confirmation</div></div></div>
+        <div class="runner-card" style="border:1px solid rgba(34,197,94,.2);"><span class="runner-medal">📜</span><div class="runner-info"><h4>Participation Certificate</h4><p style="font-size:.8rem;color:var(--grey);margin-top:4px;line-height:1.6;">Every eligible child who attends receives a certificate — distinct from winner certificates.</p></div></div>
+      </div>
+      <div class="category-awards">
+        <h3>CATEGORY AWARDS</h3>
+        <div class="cat-award-grid">
+          <div class="cat-award-card"><div class="pos">🥇</div><h4>Category Winner</h4><p>1st in category</p></div>
+          <div class="cat-award-card"><div class="pos">🥈</div><h4>First Runner-up</h4><p>2nd in category</p></div>
+          <div class="cat-award-card"><div class="pos">🥉</div><h4>Second Runner-up</h4><p>3rd in category</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section id="register">
+  <div class="reg-grid">
+    <div class="reg-info">
+      <p class="section-label">Secure Your Child's Spot</p>
+      <h2 class="section-title">REGISTER YOUR CHILD TODAY.</h2>
+      <p class="section-desc">Give your child the stage they deserve. Simple, transparent, and parent-led.</p>
+      <div class="reg-fee-box">
+        <div class="fee-label">Registration Fee</div>
+        <div class="fee-amount">₹500</div>
+        <div class="fee-desc">Per child, per category. Whether additional categories require extra fees will be confirmed in official rules.</div>
+      </div>
+      <h4 style="font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--grey);margin-bottom:12px;">What's Included</h4>
+      <div class="reg-includes">
+        <div class="reg-include-item"><span class="tick">✓</span><span>Participation in selected category (subject to eligibility)</span></div>
+        <div class="reg-include-item"><span class="tick">✓</span><span>Unique Participant ID</span></div>
+        <div class="reg-include-item"><span class="tick">✓</span><span>Participation certificate (subject to attendance)</span></div>
+        <div class="reg-include-item"><span class="tick">✓</span><span>Performance assessment using published judging criteria</span></div>
+        <div class="reg-include-item"><span class="tick">✓</span><span>Eligibility for all applicable category and district awards</span></div>
+        <div class="reg-include-item"><span class="tick">✓</span><span>Digital talent profile (if implemented and consented)</span></div>
+        <div class="reg-include-item"><span class="tick">✓</span><span>Social media feature consideration (separate consent)</span></div>
+      </div>
+      <a href="https://wa.me/918962836674" target="_blank" class="reg-whatsapp">
+        <span class="wa-icon">💬</span>
+        <div><h4>Have questions before registering?</h4><p>WhatsApp us at +91-8962836674 — we'll reply fast!</p></div>
+      </a>
+      <p style="font-size:.72rem;color:rgba(255,165,0,.55);margin-top:18px;line-height:1.65;font-style:italic;">* Refund and cancellation policy will be published before registrations open.</p>
+    </div>
+    <div class="reg-form-wrap">
+      <h3>CHILD REGISTRATION FORM</h3>
+      <p class="form-section-label">Child's Details</p>
+      <div class="form-row">
+        <div class="form-group"><label>Child's Full Name *</label><input type="text" placeholder="Enter full name" /></div>
+        <div class="form-group"><label>Date of Birth *</label><input type="date" id="childDob" /></div>
+        <div class="form-group"><label>Age Group *</label>
+          <select id="ageGroupSel">
+            <option value="">Auto-calculated from DOB</option>
+            <option>Group A (5–7 Years)</option>
+            <option>Group B (8–10 Years)</option>
+            <option>Group C (11–13 Years)</option>
+            <option>Group D (14–16 Years)</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Competition Category *</label>
+          <select>
+            <option value="">Select a category</option>
+            <option>Singing</option><option>Dancing</option>
+            <option>Drama & Acting</option><option>Poster Presentation</option>
+            <option>Memory Challenge</option><option>Mind Games</option>
+            <option>Unique Talent (Approval Required)</option>
+          </select>
+        </div>
+        <div class="form-group"><label>City / District *</label><input type="text" placeholder="Ujjain / Your City" /></div>
+        <div class="form-group"><label>Language Preference</label>
+          <select><option>Hindi</option><option>English</option><option>Both</option></select>
+        </div>
+        <div class="form-group full"><label>Brief Talent Description (Optional)</label><textarea rows="2" placeholder="Describe your child's talent in a few words…"></textarea></div>
+      </div>
+      <p class="form-section-label">Parent / Guardian Details</p>
+      <div class="form-row">
+        <div class="form-group"><label>Parent/Guardian Full Name *</label><input type="text" placeholder="Enter full name" /></div>
+        <div class="form-group"><label>Mobile / WhatsApp Number *</label><input type="tel" placeholder="+91 XXXXX XXXXX" /></div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="Optional" /></div>
+        <div class="form-group"><label>Emergency Contact (if different)</label><input type="tel" placeholder="Optional" /></div>
+      </div>
+      <p class="form-section-label">Consents & Confirmations</p>
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <div class="consent-group"><input type="checkbox" id="c1"><label for="c1">I confirm I am the parent/guardian authorised to register this child and agree to the <a href="#">Competition Rules</a> and <a href="#">Privacy Policy</a>. *</label></div>
+        <div class="consent-group"><input type="checkbox" id="c2"><label for="c2">I acknowledge the refund and cancellation policy will be published before registrations open, and I will review it before completing payment. *</label></div>
+        <div class="consent-group"><input type="checkbox" id="c3"><label for="c3">Optional: I consent to my child's photo/video being used on Talented Star's social media channels. (Unticking will not affect participation.)</label></div>
+      </div>
+      <button class="form-submit">Submit Registration →</button>
+      <p class="form-disclaimer">₹500 registration fee is payable after form submission. Your child's personal details will not be shared publicly. Questions? WhatsApp +91-8962836674</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPANSION -->
+<section id="expansion">
+  <div class="expansion-header">
+    <p class="section-label">Growth Roadmap</p>
+    <h2 class="section-title">FROM UJJAIN<br>TO THE <span style="color:var(--gold)">NATION.</span></h2>
+    <p class="section-desc">We begin with one district and build toward a national stage — every phase built on the success of the last.</p>
+  </div>
+  <div class="roadmap">
+    <div class="road-phase"><div class="road-dot">🏆</div><div class="road-content"><div class="road-phase-tag">Phase 1 — Current</div><h3>Ujjain District Pilot Championship</h3><p>The first Talented Star event launches in Ujjain, MP — building trust, operational experience, and a replicable model.</p><span class="road-status status-active">Now Launching</span></div></div>
+    <div class="road-phase"><div class="road-dot">🌆</div><div class="road-content"><div class="road-phase-tag">Phase 2 — Planned</div><h3>Nearby MP Districts</h3><p>Subject to readiness: Dewas, Indore, Ratlam, Mandsaur, and Bhopal.</p><span class="road-status status-planned">Strategic Plan</span></div></div>
+    <div class="road-phase"><div class="road-dot">🗺️</div><div class="road-content"><div class="road-phase-tag">Phase 3 — Planned</div><h3>Across Madhya Pradesh</h3><p>District-level events rolling out across the full state.</p><span class="road-status status-planned">Strategic Plan</span></div></div>
+    <div class="road-phase"><div class="road-dot">🏛️</div><div class="road-content"><div class="road-phase-tag">Phase 4 — Planned</div><h3>Uttar Pradesh Districts</h3><p>Extending the platform into selected UP districts.</p><span class="road-status status-planned">Strategic Plan</span></div></div>
+    <div class="road-phase"><div class="road-dot">🌟</div><div class="road-content"><div class="road-phase-tag">Phase 5 — Planned</div><h3>MP–UP State Grand Finale</h3><p>State-level championships and a combined MP–UP grand finale.</p><span class="road-status status-planned">Strategic Plan</span></div></div>
+    <div class="road-phase"><div class="road-dot">🇮🇳</div><div class="road-content"><div class="road-phase-tag">Phase 6 — Vision</div><h3>National Level Championships</h3><p>A national children's talent platform representing every state of India.</p><span class="road-status status-planned">Long-Term Vision</span></div></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <p class="section-label">Common Questions</p>
+  <h2 class="section-title">FREQUENTLY ASKED<br>QUESTIONS</h2>
+  <div class="faq-grid">
+    <div class="faq-item"><div class="faq-q">Who can participate? <span class="faq-arrow">+</span></div><div class="faq-a"><p>Children aged 5–16 across four age groups. Registration must be done by a parent or legal guardian. All backgrounds, schools, and cities are welcome.</p></div></div>
+    <div class="faq-item"><div class="faq-q">What is the registration fee? <span class="faq-arrow">+</span></div><div class="faq-a"><p><strong>₹500 per child, per category.</strong> This covers participation, a Participant ID, and a participation certificate (subject to attendance). Whether additional categories require extra fees will be confirmed in the official rules.</p></div></div>
+    <div class="faq-item"><div class="faq-q">Can a child enter multiple categories? <span class="faq-arrow">+</span></div><div class="faq-a"><p>This will be confirmed in the official event rules. An additional fee may apply for each extra category. Check final rules before registering for more than one.</p></div></div>
+    <div class="faq-item"><div class="faq-q">How are winners selected? <span class="faq-arrow">+</span></div><div class="faq-a"><p>Performance categories use a 100-point framework: Talent & Skill (30), Creativity (20), Confidence (20), Presentation (20), Discipline (10). Memory and Mind Games use separate accuracy-based scoring. The overall champion is selected via a transparent, pre-published method.</p></div></div>
+    <div class="faq-item"><div class="faq-q">What prizes are available? <span class="faq-arrow">+</span></div><div class="faq-a"><p>Proposed: District Champion ₹10,000 · First Runner-up ₹5,000 · Second Runner-up ₹3,000 + category awards. <span class="placeholder">Amounts are proposed and subject to official confirmation before the event.</span></p></div></div>
+    <div class="faq-item"><div class="faq-q">When and where is the event? <span class="faq-arrow">+</span></div><div class="faq-a"><p><span class="placeholder">Event date and venue will be announced soon. Follow @talentedstar975 on Instagram or WhatsApp +91-8962836674 to get notified immediately.</span></p></div></div>
+    <div class="faq-item"><div class="faq-q">Is my child's personal data safe? <span class="faq-arrow">+</span></div><div class="faq-a"><p>Yes. Children's personal details are never displayed publicly. Data is stored securely with access restricted to authorised staff. Photo/video consent is always separate and optional.</p></div></div>
+    <div class="faq-item"><div class="faq-q">What is the refund policy? <span class="faq-arrow">+</span></div><div class="faq-a"><p><span class="placeholder">The refund and cancellation policy will be published before registrations open. Please review it carefully before making payment. Contact us on WhatsApp +91-8962836674 for any questions.</span></p></div></div>
+    <div class="faq-item"><div class="faq-q">Can parents stay at the venue? <span class="faq-arrow">+</span></div><div class="faq-a"><p>Yes — parents and guardians are encouraged to be present throughout for their child's comfort and safety. The environment is designed to be warm, encouraging, and family-friendly.</p></div></div>
+    <div class="faq-item"><div class="faq-q">How do I contact the organiser? <span class="faq-arrow">+</span></div><div class="faq-a"><p>WhatsApp or call <strong>+91-8962836674</strong> anytime. DM us on Instagram at <strong>@talentedstar975</strong>. We aim to respond within a few hours.</p></div></div>
+  </div>
+</section>
+
+<!-- SAFETY STRIP -->
+<div class="safety-strip">
+  <div class="safety-item"><span class="sicon">🔒</span> Children's data never shared publicly</div>
+  <div class="safety-item"><span class="sicon">👨‍👩‍👧</span> Parent/Guardian registration required</div>
+  <div class="safety-item"><span class="sicon">📸</span> Photo & video consent always optional</div>
+  <div class="safety-item"><span class="sicon">⚖️</span> Fair, published judging criteria</div>
+  <div class="safety-item"><span class="sicon">🏅</span> Every child recognised & encouraged</div>
+  <div class="safety-item"><span class="sicon">💬</span> +91-8962836674 always reachable</div>
+</div>
+
+<!-- PARTNERS -->
+<section id="partners">
+  <div class="partners-header">
+    <p class="section-label">Partnerships</p>
+    <h2 class="section-title">POWERED BY<br><span style="color:var(--gold)">COMMUNITY & PARTNERS</span></h2>
+    <p class="section-desc" style="margin:0 auto;text-align:center;max-width:440px;">We welcome schools, local businesses, media partners, and community organisations to join the Talented Star mission.</p>
+  </div>
+  <div class="partner-tiers">
+    <div><p class="tier-label">✦ Title Sponsor ✦</p><div class="partner-row"><div class="partner-box gold-sponsor" style="padding:28px 72px;"><div class="partner-name">Your Brand Here</div></div></div></div>
+    <div><p class="tier-label">School & Education Partners</p><div class="partner-row"><div class="partner-box"><div class="partner-name">School Partner</div></div><div class="partner-box"><div class="partner-name">School Partner</div></div><div class="partner-box"><div class="partner-name">School Partner</div></div></div></div>
+    <div><p class="tier-label">Media & Community Partners</p><div class="partner-row"><div class="partner-box"><div class="partner-name">Media Partner</div></div><div class="partner-box"><div class="partner-name">Community Partner</div></div><div class="partner-box"><div class="partner-name">Digital Partner</div></div><div class="partner-box"><div class="partner-name">Local Sponsor</div></div></div></div>
+  </div>
+  <div class="become-partner">
+    <h3>BECOME A PARTNER</h3>
+    <p>Support children's talent in Ujjain. Reach families, schools, and communities across the district.</p>
+    <a href="https://wa.me/918962836674" target="_blank" class="btn-primary" style="display:inline-block;text-decoration:none;">💬 WhatsApp to Partner</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Get In Touch</p>
+  <h2 class="section-title">CONTACT US</h2>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="contact-item"><div class="contact-icon">📱</div><div><h4>WhatsApp / Phone</h4><a href="https://wa.me/918962836674">+91-8962836674</a><br><a href="tel:+918962836674" style="font-size:.76rem;color:var(--grey);">Tap to call</a></div></div>
+      <div class="contact-item"><div class="contact-icon">📸</div><div><h4>Instagram</h4><a href="https://www.instagram.com/talentedstar975" target="_blank">@talentedstar975</a></div></div>
+      <div class="contact-item"><div class="contact-icon">📧</div><div><h4>Email</h4><p class="placeholder-text">[Official email — coming soon]</p></div></div>
+      <div class="contact-item"><div class="contact-icon">📍</div><div><h4>Location</h4><p>Ujjain, Madhya Pradesh, India</p></div></div>
+      <div class="policy-links">
+        <h4>Important Policies</h4>
+        <a href="#">→ Terms & Conditions</a>
+        <a href="#">→ Privacy Policy</a>
+        <a href="#">→ Refund & Cancellation Policy</a>
+        <a href="#">→ Child Safety Policy</a>
+        <a href="#">→ Photo & Video Consent</a>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="form-group"><label>Your Name</label><input type="text" placeholder="Parent / School / Organisation" /></div>
+      <div class="form-group"><label>WhatsApp / Phone</label><input type="tel" placeholder="+91 XXXXX XXXXX" /></div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com" /></div>
+      <div class="form-group"><label>Message</label><textarea rows="5" placeholder="Questions about registration, partnership, or the event…"></textarea></div>
+      <button class="btn-primary" style="width:100%;clip-path:none;">Send Message →</button>
+      <p style="font-size:.72rem;color:var(--grey);margin-top:10px;text-align:center;">Or WhatsApp directly: <a href="https://wa.me/918962836674" style="color:var(--green);">+91-8962836674</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="logo-footer">TALENTED STAR</span>
+      <p>Ujjain District Talent Championship 2026. Discovering the stars of tomorrow — one child at a time.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/talentedstar975" target="_blank" class="fs-icon ig" title="Instagram">📸</a>
+        <a href="https://wa.me/918962836674" target="_blank" class="fs-icon wa" title="WhatsApp">💬</a>
+        <a href="tel:+918962836674" class="fs-icon ph" title="Call">📞</a>
+      </div>
+    </div>
+    <div class="footer-links"><h4>Participate</h4><ul><li><a href="#register">Register Your Child</a></li><li><a href="#categories">Categories</a></li><li><a href="#ages">Age Groups</a></li><li><a href="#how">How It Works</a></li><li><a href="#awards">Awards & Prizes</a></li></ul></div>
+    <div class="footer-links"><h4>About</h4><ul><li><a href="#about">Our Mission</a></li><li><a href="#parents">For Parents</a></li><li><a href="#expansion">Roadmap</a></li><li><a href="#faq">FAQs</a></li><li><a href="#partners">Partners</a></li></ul></div>
+    <div class="footer-links"><h4>Contact & Legal</h4><ul><li><a href="https://wa.me/918962836674">WhatsApp: +91-8962836674</a></li><li><a href="https://www.instagram.com/talentedstar975" target="_blank">@talentedstar975</a></li><li><a href="#">Terms & Conditions</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Child Safety Policy</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Talented Star — Ujjain District Talent Championship. All rights reserved.</p>
+    <p>Made with <span>♥</span> for the children of Madhya Pradesh</p>
+  </div>
+</footer>
+
+<script>
+// ── FAQ ACCORDION ──
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+// ── DOB AUTO AGE GROUP ──
+document.getElementById('childDob').addEventListener('change', function() {
+  const dob = new Date(this.value);
+  const today = new Date();
+  let age = today.getFullYear() - dob.getFullYear();
+  if (today.getMonth() - dob.getMonth() < 0 || (today.getMonth() === dob.getMonth() && today.getDate() < dob.getDate())) age--;
+  const sel = document.getElementById('ageGroupSel');
+  if (age >= 5 && age <= 7) sel.value = 'Group A (5–7 Years)';
+  else if (age >= 8 && age <= 10) sel.value = 'Group B (8–10 Years)';
+  else if (age >= 11 && age <= 13) sel.value = 'Group C (11–13 Years)';
+  else if (age >= 14 && age <= 16) sel.value = 'Group D (14–16 Years)';
+  else sel.value = '';
+});
+
+// ── COMPETITION QUIZ ──
+const questions = [
+  { q: "What is the registration fee for Talented Star 2026?", opts: ["₹200", "₹500", "₹1000", "Free"], ans: 1, exp: "The registration fee is ₹500 per child, per category." },
+  { q: "How many competition categories does Talented Star offer?", opts: ["4 categories", "5 categories", "7 categories", "10 categories"], ans: 2, exp: "There are 7 categories: Singing, Dancing, Drama, Poster Presentation, Memory Challenge, Mind Games, and Unique Talent." },
+  { q: "Which age group is a child who is 9 years old placed in?", opts: ["Group A (5–7)", "Group B (8–10)", "Group C (11–13)", "Group D (14–16)"], ans: 1, exp: "A 9-year-old falls in Group B, which covers ages 8–10." },
+  { q: "How many marks is 'Confidence' worth in the judging criteria?", opts: ["10 marks", "15 marks", "20 marks", "30 marks"], ans: 2, exp: "Confidence is worth 20 out of 100 marks in the judging framework." },
+  { q: "What does every participant receive, regardless of their competition result?", opts: ["Cash prize", "Trophy", "Participation Certificate", "Medal"], ans: 2, exp: "Every eligible participant who attends and follows the rules receives a Participation Certificate." },
+  { q: "Where is the first Talented Star championship being held?", opts: ["Indore", "Bhopal", "Ujjain", "Dewas"], ans: 2, exp: "The pilot event is Ujjain District Talent Championship 2026." },
+  { q: "What is the proposed prize for the Overall District Champion?", opts: ["₹3,000", "₹5,000", "₹7,500", "₹10,000"], ans: 3, exp: "The proposed prize for the District Champion is ₹10,000 (subject to official confirmation)." }
+];
+
+let currentQ = 0, score = 0, answered = false;
+
+function startQuiz() {
+  currentQ = 0; score = 0; answered = false;
+  document.getElementById('quizResult').style.display = 'none';
+  document.getElementById('quizQ').style.display = '';
+  document.getElementById('quizOpts').style.display = '';
+  document.getElementById('quizFeedback').textContent = '';
+  document.getElementById('quizNext').style.display = 'none';
+  renderQ();
+}
+
+function renderQ() {
+  answered = false;
+  const q = questions[currentQ];
+  // progress dots
+  const prog = document.getElementById('quizProgress');
+  prog.innerHTML = questions.map((_, i) => `<div class="qp-dot ${i < currentQ ? 'done' : i === currentQ ? 'active' : ''}"></div>`).join('');
+  document.getElementById('quizQ').textContent = `Q${currentQ+1}. ${q.q}`;
+  document.getElementById('quizFeedback').textContent = '';
+  document.getElementById('quizFeedback').className = 'quiz-feedback';
+  document.getElementById('quizNext').style.display = 'none';
+  const opts = document.getElementById('quizOpts');
+  opts.innerHTML = q.opts.map((o, i) => `<button class="quiz-opt" onclick="pickAns(i)">{o}</button>`).join('');
+}
+
+function pickAns(i) {
+  if (answered) return;
+  answered = true;
+  const q = questions[currentQ];
+  const btns = document.querySelectorAll('.quiz-opt');
+  btns.forEach(b => b.classList.add('disabled'));
+  const fb = document.getElementById('quizFeedback');
+  if (i === q.ans) {
+    score++;
+    btns[i].classList.add('correct');
+    fb.textContent = '✅ Correct! ' + q.exp;
+    fb.className = 'quiz-feedback ok';
+  } else {
+    btns[i].classList.add('wrong');
+    btns[q.ans].classList.add('correct');
+    fb.textContent = '❌ Not quite. ' + q.exp;
+    fb.className = 'quiz-feedback no';
+  }
+  const nxt = document.getElementById('quizNext');
+  nxt.textContent = currentQ < questions.length - 1 ? 'Next Question →' : 'See My Score →';
+  nxt.style.display = 'inline-block';
+}
+
+function nextQ() {
+  currentQ++;
+  if (currentQ >= questions.length) {
+    showResult(); return;
+  }
+  renderQ();
+}
+
+function showResult() {
+  document.getElementById('quizQ').style.display = 'none';
+  document.getElementById('quizOpts').style.display = 'none';
+  document.getElementById('quizFeedback').style.display = 'none';
+  document.getElementById('quizNext').style.display = 'none';
+  document.getElementById('quizProgress').innerHTML = questions.map(() => '<div class="qp-dot done"></div>').join('');
+  const res = document.getElementById('quizResult');
+  res.style.display = 'block';
+  document.getElementById('quizScore').textContent = `score/{questions.length}`;
+  const msgs = [
+    "Keep learning — read through the categories again and try once more!",
+    "Getting there! A few more facts and you'll be quiz champion.",
+    "Good effort! You know the basics — now register your child!",
+    "Great score! You clearly know Talented Star well. Time to register!",
+    "Perfect score! 🎉 You're ready — register your child now!"
+  ];
+  const idx = score <= 1 ? 0 : score <= 3 ? 1 : score <= 4 ? 2 : score <= 6 ? 3 : 4;
+  document.getElementById('quizMsg').textContent = msgs[idx];
+  document.getElementById('quizFeedback').style.display = '';
+  document.getElementById('quizFeedback').textContent = '';
+}
+
+startQuiz();
+</script>
 </body>
 </html>
